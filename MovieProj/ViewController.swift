@@ -9,10 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var emptyTableViewText: UILabel!
+    @IBAction func open(_ sender: Any) {
+        performSegue(withIdentifier: "nextView", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        emptyTableViewText.text = "Add your first movie"
     }
 
     override func didReceiveMemoryWarning() {
