@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C45DBAC2062605900FFBA80 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DBAB2062605900FFBA80 /* Movie.swift */; };
 		3C45DBAF2062AB2300FFBA80 /* CustomSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C45DBAE2062AB2300FFBA80 /* CustomSearchTableViewCell.swift */; };
+		3C583A54206BDCFD002E1DA9 /* SaveMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C583A53206BDCFD002E1DA9 /* SaveMovieViewController.swift */; };
 		3CB523CC20594EAC005240DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB523CB20594EAC005240DD /* AppDelegate.swift */; };
 		3CB523CE20594EAC005240DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB523CD20594EAC005240DD /* ViewController.swift */; };
 		3CB523D120594EAC005240DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB523CF20594EAC005240DD /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		3C45DBAB2062605900FFBA80 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		3C45DBAE2062AB2300FFBA80 /* CustomSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTableViewCell.swift; sourceTree = "<group>"; };
+		3C583A53206BDCFD002E1DA9 /* SaveMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMovieViewController.swift; sourceTree = "<group>"; };
 		3CB523C820594EAC005240DD /* MovieProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB523CB20594EAC005240DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CB523CD20594EAC005240DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB523E320595E47005240DD /* SearchViewController.swift */,
+				3C583A53206BDCFD002E1DA9 /* SaveMovieViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				3CB523DF20595281005240DD /* MovieProj.xcdatamodeld in Sources */,
 				3C45DBAF2062AB2300FFBA80 /* CustomSearchTableViewCell.swift in Sources */,
 				3CB523E420595E47005240DD /* SearchViewController.swift in Sources */,
+				3C583A54206BDCFD002E1DA9 /* SaveMovieViewController.swift in Sources */,
 				3CB523CC20594EAC005240DD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,10 +8,28 @@
 
 import UIKit
 
+protocol CustomSearchTableViewCellDelegate {
+    func callSegueFromCell(_ movie: MovieDB)
+}
+
 class CustomSearchTableViewCell: UITableViewCell {
+    
+    var delegate: CustomSearchTableViewCellDelegate!
+    var movie: MovieDB?
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet weak var goToMovieSaveButton: UIButton!
+    
+    @IBAction func goToMovieSaveView(sender: AnyObject) {
+        guard let movie = movie else {
+            return
+        }
+        
+        if(self.delegate != nil) {
+            self.delegate.callSegueFromCell(movie)
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

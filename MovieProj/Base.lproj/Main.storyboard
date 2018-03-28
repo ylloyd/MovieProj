@@ -94,6 +94,9 @@
                                                     <state key="normal" title="+">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="goToMovieSaveViewWithSender:" destination="aBW-cd-GBU" eventType="touchUpInside" id="kR4-gO-zyW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -110,6 +113,7 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="goToMovieSaveButton" destination="dux-d4-7kO" id="25T-pm-1Qk"/>
                                             <outlet property="movieImageView" destination="kag-o2-obs" id="HbH-rK-e6J"/>
                                             <outlet property="title" destination="Xs9-DX-Y1b" id="mdj-hi-CIK"/>
                                         </connections>
@@ -145,6 +149,7 @@
                         <outlet property="emptyTableViewText" destination="rHS-83-m8F" id="DNC-PI-TBw"/>
                         <outlet property="searchDisplayController" destination="3sh-1Z-rdW" id="a8c-xK-KGa"/>
                         <outlet property="searchTableView" destination="2fp-eO-hdR" id="Knr-IG-l7w"/>
+                        <segue destination="hJx-0a-YfF" kind="show" identifier="movieSearchToSave" id="wyp-rN-oEm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mq6-Vo-gwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,7 +162,46 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="184.80000000000001" y="908.9955022488756"/>
+            <point key="canvasLocation" x="185" y="1120"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="ZLL-TI-zPZ">
+            <objects>
+                <viewController id="hJx-0a-YfF" customClass="SaveMovieViewController" customModule="MovieProj" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HUk-eq-mLk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dDZ-Ii-2Y8">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-kY-XAf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="ezl-kY-XAf" secondAttribute="trailing" id="IZO-bu-fC4"/>
+                            <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="ezl-kY-XAf" secondAttribute="bottom" id="Jrg-oF-eD7"/>
+                            <constraint firstItem="ezl-kY-XAf" firstAttribute="leading" secondItem="GPq-u7-qdv" secondAttribute="leading" id="MSH-4Y-mXp"/>
+                            <constraint firstItem="dDZ-Ii-2Y8" firstAttribute="leading" secondItem="GPq-u7-qdv" secondAttribute="leading" id="Q5b-xm-B7i"/>
+                            <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="dDZ-Ii-2Y8" secondAttribute="trailing" id="Rfh-ki-F0d"/>
+                            <constraint firstItem="ezl-kY-XAf" firstAttribute="top" secondItem="GPq-u7-qdv" secondAttribute="top" id="n6f-rn-d99"/>
+                            <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="dDZ-Ii-2Y8" secondAttribute="bottom" id="nAi-WY-U79"/>
+                            <constraint firstItem="dDZ-Ii-2Y8" firstAttribute="top" secondItem="GPq-u7-qdv" secondAttribute="top" id="zvZ-tB-DlS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GPq-u7-qdv"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="PlK-uf-OtG">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="ZDG-8C-pqn"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backgroundMovieImageView" destination="dDZ-Ii-2Y8" id="2q7-8u-c2w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S7a-Kc-pdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="1119"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQJ-FR-6i0">
@@ -173,7 +217,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1F-IC-BLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-753" y="134"/>
+            <point key="canvasLocation" x="-450" y="134"/>
         </scene>
     </scenes>
 </document>

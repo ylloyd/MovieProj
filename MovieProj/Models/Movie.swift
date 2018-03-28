@@ -9,6 +9,7 @@
 import Foundation
 
 struct MovieDB {
+    var id: Int
     var original_title: String
     var title: String
     var poster_path: String
@@ -16,6 +17,7 @@ struct MovieDB {
 //    var id: String
     
     init(_ data: [String: AnyObject]) {
+        self.id = (data["id"] as? Int)!
         self.original_title = (data["original_title"] as? String) ?? ""
         self.title = (data["title"] as? String) ?? ""
         self.poster_path = (data["poster_path"] as? String) ?? ""

@@ -49,6 +49,16 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieSearchToSave" {
+            guard let productsViewController = segue.destination as? SaveMovieViewController else {
+                return
+            }
+            
+            productsViewController.movie = sender as? MovieDB
+        }
+    }
+    
 }
 
 extension SearchViewController: UITableViewDelegate {
@@ -67,6 +77,9 @@ extension SearchViewController: UITableViewDataSource {
         cell.title?.text = movies[indexPath.row].title
         cell.movieImageView?.image = UIImage(named: "no-image")
         fetchImage(cell: cell, imageUrl: movies[indexPath.row].poster_path, indexPath: indexPath)
+        
+        cell.movie = movies[indexPath.row] as? MovieDB
+        cell.delegate = self
         
         return cell
     }
@@ -147,5 +160,13 @@ extension SearchViewController: UISearchBarDelegate {
             
             task.resume()
         }
+    }
+}
+
+extension SearchViewController: CustomSearchTableViewCellDelegate {
+    func callSegueFromCell(_ movie: MovieDB) {
+        //try not to send self, just to avoid retain cycles(depends on how you handle the code on the next controller)
+        self.performSegue(withIdentifier: "movieSearchToSave", sender: movie)
+        
     }
 }
