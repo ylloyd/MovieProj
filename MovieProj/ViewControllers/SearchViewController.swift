@@ -65,6 +65,7 @@ extension SearchViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         cell.title?.text = movies[indexPath.row].title
+        cell.movieImageView?.image = UIImage(named: "no-image")
         fetchImage(cell: cell, imageUrl: movies[indexPath.row].poster_path, indexPath: indexPath)
         
         return cell
@@ -84,8 +85,10 @@ extension SearchViewController: UITableViewDataSource {
                 guard let data = data, error == nil else { return }
                 
                 DispatchQueue.main.async() {
-                    if cell.tag == indexPath.row {
+                    if cell.tag == indexPath.row && imageUrl != "" {
                         cell.movieImageView?.image = UIImage(data: data)
+                    } else {
+                        cell.movieImageView?.image = UIImage(named: "no-image")
                     }
                 }
             }

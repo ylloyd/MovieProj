@@ -78,7 +78,6 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kag-o2-obs">
                                                     <rect key="frame" x="0.0" y="0.0" width="74" height="124"/>
-                                                    <color key="backgroundColor" red="1" green="0.33126580459999999" blue="0.1110941188" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="74" id="qO3-dn-2Bd"/>
                                                     </constraints>
