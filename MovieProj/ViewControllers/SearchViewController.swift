@@ -42,6 +42,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         self.searchBar.delegate = self
         
         self.navigationItem.titleView = self.searchBar
+        self.searchBar.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,7 +79,7 @@ extension SearchViewController: UITableViewDataSource {
         cell.movieImageView?.image = UIImage(named: "no-image")
         fetchImage(cell: cell, imageUrl: movies[indexPath.row].poster_path, indexPath: indexPath)
         
-        cell.movie = movies[indexPath.row] as? MovieDB
+        cell.movie = movies[indexPath.row]
         cell.delegate = self
         
         return cell

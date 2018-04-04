@@ -58,8 +58,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHS-83-m8F">
-                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start looking for a movie" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHS-83-m8F">
+                                <rect key="frame" x="67" y="306" width="187" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -129,12 +129,10 @@
                         <constraints>
                             <constraint firstItem="2fp-eO-hdR" firstAttribute="top" secondItem="O0F-K9-rFB" secondAttribute="top" id="0iN-Y1-P22"/>
                             <constraint firstItem="2fp-eO-hdR" firstAttribute="leading" secondItem="O0F-K9-rFB" secondAttribute="leading" id="NzZ-LQ-fqi"/>
-                            <constraint firstItem="O0F-K9-rFB" firstAttribute="trailing" secondItem="rHS-83-m8F" secondAttribute="trailing" constant="167" id="OOV-el-9xo"/>
-                            <constraint firstItem="rHS-83-m8F" firstAttribute="top" secondItem="O0F-K9-rFB" secondAttribute="top" constant="259" id="T1z-DI-zkI"/>
+                            <constraint firstItem="rHS-83-m8F" firstAttribute="centerX" secondItem="O0F-K9-rFB" secondAttribute="centerX" id="V6r-35-Ubj"/>
                             <constraint firstItem="O0F-K9-rFB" firstAttribute="trailing" secondItem="2fp-eO-hdR" secondAttribute="trailing" id="cp0-4Z-szy"/>
-                            <constraint firstItem="O0F-K9-rFB" firstAttribute="bottom" secondItem="rHS-83-m8F" secondAttribute="bottom" constant="323" id="fkW-25-607"/>
                             <constraint firstItem="O0F-K9-rFB" firstAttribute="bottom" secondItem="2fp-eO-hdR" secondAttribute="bottom" id="gCK-km-e2x"/>
-                            <constraint firstItem="rHS-83-m8F" firstAttribute="leading" secondItem="O0F-K9-rFB" secondAttribute="leading" constant="166" id="md4-XL-6Ij"/>
+                            <constraint firstItem="rHS-83-m8F" firstAttribute="centerY" secondItem="O0F-K9-rFB" secondAttribute="centerY" id="j2z-3T-tzf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O0F-K9-rFB"/>
                     </view>
