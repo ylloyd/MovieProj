@@ -12,7 +12,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emptyTableViewText: UILabel!
     @IBOutlet weak var searchTableView: UITableView!
-    @IBOutlet weak var item: UIBarButtonItem!
     
     var searchBar = UISearchBar()
     
