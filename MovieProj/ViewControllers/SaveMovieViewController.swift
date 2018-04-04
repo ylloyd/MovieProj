@@ -11,10 +11,14 @@ import UIKit
 
 class SaveMovieViewController: UIViewController {
     @IBOutlet weak var backgroundMovieImageView: UIImageView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
-    var movieId: Int?
     var movie: MovieDB?
     var dataObject: Int?
+    var movieCredits = MovieCreditDB()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +27,13 @@ class SaveMovieViewController: UIViewController {
             return
         }
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
+        title = "Informations"
         
-        title = movie.original_title
+        movieTitleLabel.text = movie.original_title
+        datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+
         fetchImage(imageUrl: movie.poster_path)
+        getMovieCredits(movieId: movie.id)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -58,10 +61,10 @@ class SaveMovieViewController: UIViewController {
         }
     }
     
-    func getMovieCredits(movieId: String) {
+    func getMovieCredits(movieId: Int) {
         let apiKey = "b753bea3c6fd7e64a2e07a4538ee6aa9"
         let session = URLSession.shared
-        let urlString = "https://api.themoviedb.org/3/movie\(movieId)?api_key=\(apiKey)"
+        let urlString = "https://api.themoviedb.org/3/movie/\(movieId)/credits?api_key=\(apiKey)"
         let url = URL(string: urlString)
         
         if let url = url {
@@ -69,22 +72,32 @@ class SaveMovieViewController: UIViewController {
             let task = session.dataTask(with: url) {
                 (data, response, error) in
                 
-                if let data = data, let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject], let movieResults = json["results"] as? [[String: AnyObject]] {
+                if let data = data, let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject], let movieCreditsCastResults = json["cast"] as? [[String: AnyObject]], let movieCreditsCrewResults = json["crew"] as? [[String: AnyObject]] {
                     
-//                    self.movies = movieResults.reduce([]) {
-//                        (result, data) in
-//
-//                        var res = result
-//                        let movie = MovieDB(data)
-//
-//                        res.append(movie)
-//
-//                        return res
-//                    }
-//
-//                    DispatchQueue.main.async {
-//                        self.searchTableView.reloadData()
-//                    }
+                    let movieCreditsCast = movieCreditsCastResults.reduce([]) {
+                        (result, data) in
+
+                        var res = result
+                        let movieCreditCast = CastDB(data)
+
+                        res.append(movieCreditCast)
+                        return res
+                    }
+                    
+                    let movieCreditsCrew = movieCreditsCrewResults.reduce([]) {
+                        (result, data) in
+                        
+                        var res = result
+                        let movieCreditCrew = CrewDB(data)
+                        
+                        res.append(movieCreditCrew)
+                        return res
+                    }
+
+                    DispatchQueue.main.async {
+                        self.movieCredits.cast = movieCreditsCast as? [CastDB]
+                        self.movieCredits.crew = movieCreditsCrew as? [CrewDB]
+                    }
                     
                 } else {
                     // if error

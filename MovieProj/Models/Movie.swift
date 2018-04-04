@@ -13,8 +13,6 @@ struct MovieDB {
     var original_title: String
     var title: String
     var poster_path: String
-//    var productsCount: Int
-//    var id: String
     
     init(_ data: [String: AnyObject]) {
         self.id = (data["id"] as? Int)!
