@@ -12,13 +12,41 @@ import UIKit
 class SaveMovieViewController: UIViewController {
     @IBOutlet weak var backgroundMovieImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    
+    @IBAction func saveToCoreData(_ sender: Any) {
+        guard let movie = movie else {
+            return
+        }
+        
+        let alreadyExistsInDB = self.dataController.movie(id: movie.id)
+        
+        if alreadyExistsInDB {
+            print("Already exists")
+            return
+        } else {
+            print("Good to go!")
+        }
+        
+        
+        if let movieToSave = self.dataController.newObject(NSStringFromClass(Movie.self)) as? Movie {
+            
+            
+            
+            movieToSave.id = Int32(movie.id)
+            movieToSave.original_title = movie.original_title
+            
+            self.dataController.save()
+        }
+    }
     
     var movie: MovieDB?
     var dataObject: Int?
     var movieCredits = MovieCreditDB()
+    let dataController = DataController.default
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +59,7 @@ class SaveMovieViewController: UIViewController {
         
         movieTitleLabel.text = movie.original_title
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
+        datePicker.maximumDate = NSDate() as Date
 
         fetchImage(imageUrl: movie.poster_path)
         getMovieCredits(movieId: movie.id)

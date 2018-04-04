@@ -197,7 +197,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0e-xF-C0b">
-                                <rect key="frame" x="0.0" y="64" width="320" height="1136"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="974"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3D-0g-2kI">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1200"/>
@@ -249,7 +249,7 @@
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="dDZ-Ii-2Y8" secondAttribute="trailing" id="Rfh-ki-F0d"/>
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="I0u-ra-0zm" secondAttribute="bottom" id="W4v-FK-22n"/>
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="Y0e-xF-C0b" secondAttribute="trailing" id="dUs-vQ-0TB"/>
-                            <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="Y0e-xF-C0b" secondAttribute="bottom" id="ft3-PY-Lcp"/>
+                            <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="Y0e-xF-C0b" secondAttribute="bottom" constant="162" id="ft3-PY-Lcp"/>
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="bottom" secondItem="dDZ-Ii-2Y8" secondAttribute="bottom" id="nAi-WY-U79"/>
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="aF6-Yf-pIi" secondAttribute="trailing" id="nkq-DW-oEY"/>
                             <constraint firstItem="GPq-u7-qdv" firstAttribute="trailing" secondItem="I0u-ra-0zm" secondAttribute="trailing" id="qhr-Kk-Pbh"/>
@@ -260,7 +260,11 @@
                         <viewLayoutGuide key="safeArea" id="GPq-u7-qdv"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="PlK-uf-OtG">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="ZDG-8C-pqn"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="ZDG-8C-pqn">
+                            <connections>
+                                <action selector="saveToCoreData:" destination="hJx-0a-YfF" id="B2i-33-xFP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="320" height="1200"/>
                     <connections>
@@ -268,7 +272,6 @@
                         <outlet property="blurView" destination="e3D-0g-2kI" id="l39-KA-Ohc"/>
                         <outlet property="datePicker" destination="I0u-ra-0zm" id="Nka-gn-ewt"/>
                         <outlet property="movieTitleLabel" destination="EmC-WL-1Sf" id="WvC-fB-hev"/>
-                        <outlet property="scrollView" destination="Y0e-xF-C0b" id="Py8-NX-M6N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S7a-Kc-pdR" userLabel="First Responder" sceneMemberID="firstResponder"/>

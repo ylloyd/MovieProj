@@ -47,11 +47,6 @@ struct DataController {
     func movies() -> [Movie] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
         
-//        let nameDescriptor = NSSortDescriptor(key: "name", ascending: true)
-//        let nbProductsDescriptor = NSSortDescriptor(key: "numberOfProducts", ascending: true)
-//        
-//        request.sortDescriptors = [nbProductsDescriptor, nameDescriptor]
-        
         do {
             guard let movies = try managedObjectContext.fetch(request) as? [Movie] else {
                 return []
@@ -60,6 +55,26 @@ struct DataController {
             return movies
         } catch {
             return []
+        }
+    }
+    
+    func movie(id: Int) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+        fetchRequest.predicate = NSPredicate(format: "id = %d", id)
+        
+        do {
+            let movies = try managedObjectContext.fetch(fetchRequest)
+            
+            if movies.count > 0 {
+                // we've got the profile already cached!
+                return true
+            } else {
+                // no local cache yet, use placeholder for now
+                return false
+            }
+        } catch {
+            // handle error
+            return false
         }
     }
     
