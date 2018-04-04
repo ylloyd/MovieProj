@@ -12,17 +12,17 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emptyTableViewText: UILabel!
     @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var item: UIBarButtonItem!
     
     var searchBar = UISearchBar()
     
     @IBAction func dismissKeyboardButton(sender: Any) {
         searchBar.resignFirstResponder()
+        self.navigationItem.rightBarButtonItem = nil
     }
     
     var movies: [MovieDB] = []
     let dataController = DataController.default
-    
-    var keys: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         self.navigationItem.titleView = self.searchBar
         self.searchBar.becomeFirstResponder()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(SearchViewController.dismissKeyboardButton(sender:)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -123,6 +124,11 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        self.navigationItem.rightBarButtonItem = nil
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(SearchViewController.dismissKeyboardButton(sender:)))
     }
     
     func searchMovie(query: String) {
