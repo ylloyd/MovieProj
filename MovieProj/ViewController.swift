@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        emptyTableViewText.text = "Add your first movie"
+        emptyTableViewText.text = "You have no movies yet. We suggest you to start by searching a movie"
     }
 
     override func didReceiveMemoryWarning() {
