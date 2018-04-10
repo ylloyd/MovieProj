@@ -15,6 +15,7 @@ class SaveMovieViewController: UIViewController {
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var alert = AlertBuilder().addOkAction()
     
     @IBAction func saveToCoreData(_ sender: Any) {
         guard let movie = movie else {
@@ -24,21 +25,18 @@ class SaveMovieViewController: UIViewController {
         let alreadyExistsInDB = self.dataController.movie(id: movie.id)
         
         if alreadyExistsInDB {
-            print("Already exists")
+            showAlreadyExistsInDBAlert()
             return
-        } else {
-            print("Good to go!")
         }
         
-        
         if let movieToSave = self.dataController.newObject(NSStringFromClass(Movie.self)) as? Movie {
-            
-            
             
             movieToSave.id = Int32(movie.id)
             movieToSave.original_title = movie.original_title
             
+            
             self.dataController.save()
+            showSavedWithSuceessAlert()
         }
     }
     
@@ -135,5 +133,19 @@ class SaveMovieViewController: UIViewController {
             
             task.resume()
         }
+    }
+    
+    func showSavedWithSuceessAlert() {
+        alert
+            .withTitle("Yay!")
+            .withMessage("Your movie was successfully saved!")
+            .show(in: self)
+    }
+    
+    func showAlreadyExistsInDBAlert() {
+        alert
+            .withTitle("Oops")
+            .withMessage("You already saved this movie. You can't add it again")
+            .show(in: self)
     }
 }
