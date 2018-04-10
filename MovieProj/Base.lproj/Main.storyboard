@@ -19,17 +19,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nI2-Ru-jh3">
-                                <rect key="frame" x="20" y="306" width="280" height="20.5"/>
+                                <rect key="frame" x="20" y="306" width="280" height="262"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Zn-Pz-hLP">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Wg8-uT-WDT"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="TeI-Lq-aS6"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Zn-Pz-hLP" secondAttribute="trailing" id="4KD-1Z-9oB"/>
+                            <constraint firstItem="0Zn-Pz-hLP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8xv-Kf-7md"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nI2-Ru-jh3" secondAttribute="trailing" constant="20" id="9GA-uC-LxF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nI2-Ru-jh3" secondAttribute="bottom" constant="241.5" id="CmN-HD-47Z"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nI2-Ru-jh3" secondAttribute="bottom" id="CmN-HD-47Z"/>
+                            <constraint firstItem="0Zn-Pz-hLP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QD4-Nh-YAe"/>
                             <constraint firstItem="nI2-Ru-jh3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QKZ-f8-3hK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Zn-Pz-hLP" secondAttribute="bottom" id="cEm-TH-1na"/>
                             <constraint firstItem="nI2-Ru-jh3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="242" id="gwc-nt-db0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -43,6 +55,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emptyTableViewText" destination="nI2-Ru-jh3" id="K56-Ld-LZA"/>
+                        <outlet property="movieTableView" destination="0Zn-Pz-hLP" id="Z4w-3x-yXR"/>
                         <segue destination="MGR-f8-h4n" kind="show" identifier="nextView" id="GAV-lf-84G"/>
                     </connections>
                 </viewController>

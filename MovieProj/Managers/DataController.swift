@@ -90,4 +90,19 @@ struct DataController {
         }
     }
     
+    func deleteAll() {
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+        
+        // Create Batch Delete Request
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try managedObjectContext.execute(batchDeleteRequest)
+            
+        } catch {
+            // Error Handling
+        }
+    }
+    
 }

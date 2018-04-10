@@ -33,7 +33,8 @@ class SaveMovieViewController: UIViewController {
             
             movieToSave.id = Int32(movie.id)
             movieToSave.original_title = movie.original_title
-            
+            movieToSave.release_date = movie.release_date
+            movieToSave.viewed_at = nsDateToStringDate(date: datePicker.date)
             
             self.dataController.save()
             showSavedWithSuceessAlert()
@@ -58,6 +59,7 @@ class SaveMovieViewController: UIViewController {
         movieTitleLabel.text = movie.original_title
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
         datePicker.maximumDate = NSDate() as Date
+        datePicker.datePickerMode = UIDatePickerMode.date
 
         fetchImage(imageUrl: movie.poster_path)
         getMovieCredits(movieId: movie.id)
@@ -147,5 +149,12 @@ class SaveMovieViewController: UIViewController {
             .withTitle("Oops")
             .withMessage("You already saved this movie. You can't add it again")
             .show(in: self)
+    }
+    
+    func nsDateToStringDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let convertedDate = dateFormatter.string(from: date)
+        return convertedDate
     }
 }

@@ -32,6 +32,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         searchTableView.isHidden = true
         searchTableView.rowHeight = 124.0
+        
+//        dataController.deleteAll()
         // Do any additional setup after loading the view.
     }
     
