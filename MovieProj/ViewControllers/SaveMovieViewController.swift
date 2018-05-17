@@ -34,7 +34,10 @@ class SaveMovieViewController: UIViewController {
             movieToSave.id = Int32(movie.id)
             movieToSave.original_title = movie.original_title
             movieToSave.release_date = movie.release_date
+            movieToSave.backdrop_path = movie.backdrop_path
+            movieToSave.poster_path = movie.poster_path
             movieToSave.viewed_at = nsDateToStringDate(date: datePicker.date)
+            movieToSave.overview = movie.overview
             
             self.dataController.save()
             showSavedWithSuceessAlert()

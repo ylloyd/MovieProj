@@ -12,10 +12,14 @@ struct CastDB {
     var id: Int
     var cast_id: Int
     var name: String
+    var role: String?
+    var imageUrl: String?
     
     init(_ data: [String: AnyObject]) {
         self.id = (data["id"] as? Int)!
         self.cast_id = (data["cast_id"] as? Int) ?? 0
         self.name = (data["name"] as? String) ?? ""
+        self.role = (data["character"] as? String) ?? ""
+        self.imageUrl = (data["profile_path"] as? String) ?? ""
     }
 }

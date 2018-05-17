@@ -21,20 +21,56 @@ class ViewController: UIViewController {
     var movie: Movie?
     var movies: [String: [Movie]] = [:]
     var keys: [String] = []
+    private let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        setRefreshControl()
+        
         emptyTableViewText.text = "You have no movies yet. We suggest you to start by searching a movie"
         
-        movieTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+        movieTableView.rowHeight = 80
+        //movieTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+        displayDefault()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         loadFromCoreData()
+        movieTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setRefreshControl() {
+        refreshControl.addTarget(self, action:  #selector(pullToRefresh), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Movie Data ...", attributes: nil)
+        movieTableView.refreshControl = refreshControl
+    }
+    
+    @objc func pullToRefresh() {
+        DispatchQueue.main.async {
+            self.loadFromCoreData()
+            self.movieTableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func displayDefault() {
+        let moviesFromCoreData = dataController.movies()
+        
+        if moviesFromCoreData.isEmpty {
+            movieTableView.isHidden = true
+            emptyTableViewText.isHidden = false
+        } else {
+            movieTableView.isHidden = false
+            emptyTableViewText.isHidden = true
+        }
     }
     
     func loadFromCoreData() {
@@ -47,10 +83,6 @@ class ViewController: UIViewController {
             if let movieName = movie.original_title {
                 let firstChar = String(movieName.prefix(1))
                 
-                if !keys.contains(firstChar) {
-                    keys.append(firstChar)
-                }
-                
                 if let _ = brandsPerLetter[firstChar] {
                     brandsPerLetter[firstChar]?.append(movie)
                 } else {
@@ -61,73 +93,85 @@ class ViewController: UIViewController {
             
             return result
         }
-        
-        keys.sort { $0 < $1 }
-        
-        movies = brandsPerLetter
     }
 
 }
 
 extension ViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return keys.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let key = keys[section]
-        if let movies = movies[key] {
-            return movies.count
-        }
-        
-        return 0
+        return dataController.movies().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath) as! CustomMainTableViewCell
         
-        let key = keys[indexPath.section]
-        if let movies = movies[key] {
-            let movie = movies[indexPath.row]
-            cell.textLabel?.text = movie.original_title
+        let movies = dataController.movies()
+        let movie = movies[indexPath.row]
+        cell.movieTitle?.text = movie.original_title
+        cell.movieDateViewed.text = movie.viewed_at
+        if let imagePath = movie.backdrop_path {
+            fetchImage(cell: cell, imageUrl: imagePath, indexPath: indexPath)
         }
         
         return cell
     }
     
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return keys
+    func fetchImage(cell: CustomMainTableViewCell, imageUrl: String, indexPath: IndexPath) {
+        let session = URLSession.shared
+        let urlString = "https://image.tmdb.org/t/p/w185\(imageUrl)"
+        let url = URL(string: urlString)
+        
+        if let url = url {
+            cell.tag = indexPath.row
+            
+            let task = session.dataTask(with: url) {
+                (data, response, error) in
+                
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async() {
+                    if cell.tag == indexPath.row && imageUrl != "" {
+                        cell.movieBackgroundImageView?.image = UIImage(data: data)
+                    } else {
+                        cell.movieBackgroundImageView?.image = UIImage(named: "no-image")
+                    }
+                }
+            }
+            task.resume()
+        }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            movies.remove(at: indexPath.row)
+//            movieTableView.deleteRows(at: [indexPath], with: .fade)
+//            movieTableView.reloadData()
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let key = keys[indexPath.section]
-        if let movies = movies[key] {
-            let movie = movies[indexPath.row]
+        let movies = dataController.movies()
+        let movie = movies[indexPath.row]
             
-            //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            //        let vc = storyboard.instantiateViewController(withIdentifier: "ProductsViewController") as? ProductsViewController
-            //
-            //        guard let productsViewController = vc else {
-            //            return
-            //        }
-            //
-            //        productsViewController.brand = brand
-            //        navigationController?.pushViewController(productsViewController, animated: true)
-            
-//            performSegue(withIdentifier: "brandToProducts", sender: brand)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mvc = storyboard.instantiateViewController(withIdentifier: "MovieViewController") as? MovieViewController
+
+        guard let movieViewController = mvc else {
+            return
         }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let key = keys[section]
-        return key
+
+        movieViewController.movie = movie
+        navigationController?.pushViewController(movieViewController, animated: true)
+        
+//        self.present(movieViewController, animated: true, completion: nil)
     }
     
 }
